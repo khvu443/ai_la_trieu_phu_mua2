@@ -1,0 +1,70 @@
+body{
+    margin:0;
+    background-image: url(bg.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    overflow: hidden;
+}
+.game-container{
+    margin: 0;
+    width: 100%;
+    height:800px;
+    display: flex;
+    flex-direction: row;
+    
+}
+.price-list{
+    width: 30%;
+    
+    height: 650px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 0px;
+    
+}
+.price{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    height: 40px;
+    background-color: aqua; 
+    margin: 5px;
+    border-radius: 20px;
+    
+}
+/* .price:hover{
+    background-color: orangered;
+} */
+.milestones{
+    background-color: #171D4F;
+    color: white;
+}
+/* #milestones:hover{
+    background-color: orangered;
+} */
+.game-box{
+    width: 70%;
+    height: 100%;
+    
+}
+.game-helping{
+    width: 100%;
+    height: 20%;
+
+}
+.text-wrapper
+{
+    text-align:justify;
+    height: 70px;
+}   
+
+.active-question-number{
+    background-color: orangered;
+    color: white;
+  }

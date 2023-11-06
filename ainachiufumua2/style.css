@@ -1,0 +1,235 @@
+body {
+  overflow: hidden;
+
+}
+
+.desktop {
+  margin-top: -100px;
+  background-image: url(bg.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.desktop .div {
+  width: 1440px;
+  height: 1024px;
+  position: relative;
+}
+
+.desktop .overlap-group {
+  position: absolute;
+  width: 1440px;
+  height: 832px;
+  top: 96px;
+  left: 0;
+}
+
+.desktop .overlap {
+  position: absolute;
+  width: 250px;
+  height: 89px;
+  top: 372px;
+  left: 1067px;
+  background-color: #9b4fe6;
+  border-radius: 20px;
+}
+
+.desktop .text-wrapper {
+  position: absolute;
+  top: 21px;
+  left: 31px;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 35px;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.desktop .div-wrapper {
+  position: absolute;
+  width: 250px;
+  height: 89px;
+  top: 493px;
+  left: 1067px;
+  background-color: #9b4fe6;
+  border-radius: 20px;
+}
+
+.desktop .text-wrapper-2 {
+  position: absolute;
+  top: 21px;
+  left: 36px;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 35px;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.desktop .overlap-2 {
+  position: absolute;
+  width: 250px;
+  height: 89px;
+  top: 251px;
+  left: 1067px;
+  background-color: #9b4fe6;
+  border-radius: 20px;
+}
+
+.desktop .text-wrapper-3 {
+  position: absolute;
+  top: 24px;
+  left: 80px;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 35px;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.desktop .overlap-3 {
+  position: absolute;
+  width: 375px;
+  height: 556px;
+  top: 138px;
+  left: 47px;
+  background-color: #4f4fe6;
+  border-radius: 20px;
+}
+
+.desktop .leader_board {
+  position: absolute;
+  top: 131px;
+  left: 21px;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 35px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.desktop .overlap-4 {
+  position: absolute;
+  width: 375px;
+  height: 100px;
+  top: 0;
+  left: 0;
+  background-color: #9b4fe6;
+  border-radius: 20px 20px 0px 0px;
+}
+
+.desktop .text-wrapper-4 {
+  position: absolute;
+  top: 25px;
+  left: 21px;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 40px;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.desktop .rectangle {
+  position: absolute;
+  width: 1440px;
+  height: 96px;
+  top: 928px;
+  left: 0;
+  background-color: #000000;
+}
+
+.desktop .overlap-5 {
+  position: absolute;
+  width: 1440px;
+  height: 96px;
+  top: 0;
+  left: 0;
+  background-color: #000000;
+}
+
+.desktop .user {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  top: 8px;
+  left: 858px;
+}
+
+.desktop .p {
+  position: absolute;
+  top: 26px;
+  left: 938px;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-weight: 200;
+  color: #ffffff;
+  font-size: 35px;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+button {
+  background-color: #9B4FE6;
+  border: 0;
+}
+
+button:hover {
+  background-color: #FFB8FF;
+}
+
+/* dd container */
+.dropdown {
+  display: inline-block;
+  position: relative;
+  outline: none;
+  margin: 10px;
+}
+
+/* button */
+.dropbtn {
+  color: white;
+  cursor: pointer;
+  transition: 0.35s ease-out;
+}
+
+/* dd content */
+.dropdown .dropdown-content {
+  position: absolute;
+  top: 50%;
+  background-color: #f7f7f7;
+  min-width: 120%;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 100000;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.35s ease-out;
+}
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  display: block;
+  text-decoration: none;
+  transition: 0.35s ease-out;
+}
+.dropdown-content a:hover {
+  background-color: #eaeaea;
+}
+
+/* show dd content */
+.dropdown:focus .dropdown-content {
+  outline: none;
+  transform: translateY(20px);
+  visibility: visible;
+  opacity: 1;
+}

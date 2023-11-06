@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\WhoWantsToBeAMillionaire_API.props" />
+</Project>

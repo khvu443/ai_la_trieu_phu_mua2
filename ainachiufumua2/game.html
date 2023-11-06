@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ai là triệu phú</title>
+  <link rel="stylesheet" href="game_style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <div class="container-md">
+    <div class="game-container">
+      <div class="price-list">
+        <p class="price" id="milestones">120000</p>
+        <p class="price">110000</p>
+        <p class="price">100000</p>
+        <p class="price">90000</p>
+        <p class="price milestones">80000</p>
+        <p class="price">70000</p>
+        <p class="price">60000</p>
+        <p class="price">50000</p>
+        <p class="price milestones">40000</p>
+        <p class="price">30000</p>
+        <p class="price">20000</p>
+        <p class="price">10000</p>
+      </div>
+      <div class="game-box">
+        <div class="game-helping my-3">
+          <button class="btn btn-primary" id="fifty-fifty-helper">50/50</button>
+          <button class="btn btn-primary" id="phone-helpder">
+            <i class="fa-solid fa-phone fa-2xl"></i>
+          </button>
+          <button class="btn btn-primary" id="audience-helper">
+            <i class="fa-solid fa-people-group fa-2xl"></i>
+          </button>
+        </div>
+        <div class="row justify-content-between"">
+            <div class=" col-12">
+          <div id="conversation">
+
+            <div class="card mb-3" id="player-dialog">
+              <div class="row g-0">
+                <div class="col-md-2">
+                  <img src="user.png " class="img-thumbnail rounded-start" alt="player-image">
+                </div>
+                <div class="col-md-5">
+                  <div class="card-body">
+                    <h5 class="card-title">Player</h5>
+                    <p class="card-text" id="player-dialog-conversation">This is a wider card with supporting text below
+                      as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card mb-3" id="friend-dialog">
+              <div class="row g-0 justify-content-end">
+
+                <div class="col-md-5 align-self-end">
+                  <div class="card-body">
+                    <h5 class="card-title text-end">Friend</h5>
+                    <p class="card-text text-end" id="friend-dialog-conversation">This is a wider card with supporting
+                      text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  </div>
+                </div>
+                <div class="col-md-2 align-self-end">
+                  <img src="user.png " class="img-thumbnail rounded-start" alt="user-image">
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-10 justify-content-center">
+          <div id="bar-percent-ask-audience">
+            <canvas class="bg-light p-3 py-2 border border-black rounded-3" id="myChart" width="350"
+              height="100"></canvas>
+          </div>
+
+        </div>
+
+        <div class="my-3 col-3">
+          <div
+            class="p-3 py-2 mb-2 bg-primary bg-gradient text-white border border-black rounded-3 text-wrapper bg-opacity-75 fs-4"
+            id="score">Score: 0</div>
+        </div>
+        <div class="col-12">
+          <div
+            class="p-3 mb-2 bg-primary bg-gradient text-white border border-black rounded-3 text-wrapper bg-opacity-75">
+            <p id="question">Cơm hến vị như nào?</p>
+          </div>
+          <div class="row justify-content-between">
+            <p class="bg-primary bg-gradient text-white col-5 text-wrapper border border-black rounded-3 bg-opacity-75 fs-5 choosing-answer"
+              id="answer_a">
+              A. Như Cứt
+            </p>
+            <p class="bg-primary bg-gradient text-white col-5 text-wrapper border border-black rounded-3 bg-opacity-75 fs-5 choosing-answer"
+              id="answer_b">
+              B. Như Cứt
+            </p>
+            <p class="bg-primary bg-gradient text-white col-5 text-wrapper border border-black rounded-3 bg-opacity-75 fs-5 choosing-answer"
+              id="answer_c">
+              C. Như Cứt
+            </p>
+            <p class="bg-primary bg-gradient text-white col-5 text-wrapper border border-black rounded-3 bg-opacity-75 fs-5 choosing-answer"
+              id="answer_d">
+              D. Như Cứt
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+    crossorigin="anonymous"></script>
+
+  <script src="js/game.js"></script>
+</body>
+
+</html>
