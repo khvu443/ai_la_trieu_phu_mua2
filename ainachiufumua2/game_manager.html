@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <title>Managerment</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" id="product-tab">Question</a>
+                    </li>
+                    <li class="nav-item dropdown" id="user-info">
+                        <a href="index.html" class="btn btn-outline-primary" id="login-btn">Login</a>
+                        <div id="user-btn">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="display-username"></span>
+                              </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" id="logout-btn">Logout</a></li>
+                            </ul>
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-md mt-3" id="quesion-tabs">
+
+        <p>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="add-new-question-btn">Add new question</button>
+        </p>
+        <h3 id="notice-product-alert"></h3>
+        <div>
+            <table id="question-table" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Question Id</th>
+                        <th>Question Content</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <div class="container-md mt-3" id="answer-tabs">
+        <h5 id="header-answer">All Answer Of Question Number: 1</h5>
+        <p>
+            <button class="btn btn-outline-secondary" id="back-question-btn">Go back to question</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="add-new-answer-btn">Add new answer</button>
+        </p>    
+        <div>
+            <table id="answer-table" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Answer Id</th>
+                        <th>Answer Content</th>
+                        <th>Is Correct</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal add new and update -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content ">
+                <div class="modal-header ">
+                    <h1 class="modal-title fs-5 " id="Add-Update-Label">Add Question</h1>
+                </div>
+                <div class="modal-body ">
+                    <h3 id="notice-change"></h3>
+                    <form id="form-question">
+                        <div class="mb-3">
+                            <input type="number" class="form-control" id="question-id" hidden>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="product-name" class="form-label">Question</label>
+                            <input type="text" class="form-control" id="question-content">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer ">
+                    <button type="button " class="btn btn-primary" id="save-btn">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+    <script src="js/authen.js"></script>
+    <script src="js/game_manager.js"></script>
+</body>
+
+
+</html>

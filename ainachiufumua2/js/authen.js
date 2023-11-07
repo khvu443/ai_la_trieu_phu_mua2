@@ -74,7 +74,7 @@ $("#register").click(function () {
         name: $("#name").val(),
         username: $("#username-register").val(),
         password: $("#password-register").val(),
-        role: "Player",
+        role_id: 2,
       }),
       xhrFields: {
         withCredentials: true,
@@ -135,14 +135,13 @@ $("#update-user-btn").click(async function () {
   $("#notice-user-change").empty();
 
   $("#user-id").val(u.user_id);
-  $("#role").val(u.role);
-  $("#name").val(u.name);
-  $("#email").val(u.email);
-  $("#book-id").val(u.book_id);
+  $("#role").val(u.role_id);
+  $("#name-update").val(u.name);
+  $("#username-update").val(u.username);
 });
 
 $("#btn-update-save").click(function () {
-  if ($("#passowrd").val() === $("#confirm-password").val()) {
+  if ($("#password-update").val() === $("#confirm-password-update").val()) {
     $.ajax({
       headers: {
         "Access-Control-Allow-Origin": "*",
@@ -157,11 +156,10 @@ $("#btn-update-save").click(function () {
       },
       data: JSON.stringify({
         user_id: $("#user-id").val(),
-        name: $("#name").val(),
-        email: $("#email").val(),
-        book_id: $("#book-id").val(),
-        password: $("#password").val(),
-        role: $("#role").val(),
+        name: $("#name-update").val(),
+        username: $("#username-update").val(),
+        password: $("#password-update").val(),
+        role_id: $("#role").val(),
       }),
       error: function () {
         console.log("Error");
@@ -178,7 +176,8 @@ $("#btn-update-save").click(function () {
           .append("Update Success!")
           .removeClass()
           .addClass("text-success");
-        $("#display-username").empty().append(user.userName);
+          
+        $(".display-username").empty().append(user.username);
         setTimeout(() => $("#notice-user-change").empty(), 5000);
       },
     });

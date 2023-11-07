@@ -4,7 +4,7 @@ var answer;
 var index = 0;
 var score = 0;
 
-var user;
+var uid = getCookie("uid");
 var user_score;
 
 var count_dialog = -1;
@@ -13,36 +13,49 @@ const ctx = $("#myChart");
 
 $(document).ready(function () {
 
+  //Cứ mỗi 5s thì sẽ cập nhật cái bảng xếp hạng
+  setInterval(setLeaderBoard(), 5000);
 
-  //get question
-  $.ajax({
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-    },
-    type: "GET",
-    contentType: "application/json",
-    Credential: "include",
-    url: "https://localhost:7099/api/Questions",
-    xhrFields: {
-      withCredentials: true,
-    },
-    async: false,
-    error: function () {
-      console.log("Error");
-    },
-    success: function (data) {
-      question = data;
-    },
-  });
+  if (uid != null) {
+    //get question
+    $.ajax({
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+      type: "GET",
+      contentType: "application/json",
+      Credential: "include",
+      url: "https://localhost:7099/api/Questions",
+      xhrFields: {
+        withCredentials: true,
+      },
+      async: false,
+      error: function () {
+        console.log("Error");
+      },
+      success: function (data) {
+        question = data;
+      },
+    });
 
-  displayConversation(true);
-  setScore(score);
-  setActiveQuestion(12 - index);
-  setQuestion(index);
-  setAnswerQuestion(index);
-  $("#bar-percent-ask-audience").hide();
+    //lần đầu chơi thì sẽ lưu điểm với giá trị là 0
+    //Sẽ update điểm nếu như người chơi kết thúc
+    getScoreByUserId();
+    if (user_score == null) {
+      saveScore();
+    }
+    else { score = user_score.score; console.log(user_score.score); }
 
-  console.log(correctAnswer);
+
+    displayConversation(true);
+    setScore(score);
+    setActiveQuestion(12 - index);
+    setQuestion(index);
+    setAnswerQuestion(index);
+    $("#bar-percent-ask-audience").hide();
+
+    console.log(correctAnswer);
+  }
 });
 
 //set question
@@ -117,21 +130,68 @@ $(".choosing-answer").on("click", function (e) {
     index++;
     score += 10000;
     setScore(score);
-    setActiveQuestion(12 - index);
-    setQuestion(index);
-    setAnswerQuestion(index);
-    resetAnswer();
+
+
+    //Nếu như câu hỏi hiện mà >= số lượng câu hỏi thì sẽ kết thúc game và chiến thắng
+    if (index >= question.length) {
+      displayAlertGameResult(true);
+      location.reload();
+    } else {
+      setActiveQuestion(12 - index);
+      setQuestion(index);
+      setAnswerQuestion(index);
+      resetAnswer();
+    }
     $("#bar-percent-ask-audience").hide();
+
+  }
+  else {
+    displayAlertGameResult(false);
   }
 });
 
-//display win game notification
-function displayAlertWinGame() {}
+//display win game or lose game notification
+function displayAlertGameResult(isWin) {
+  updateScoreByUserId();
+  if (isWin) {
+    alert("Win!");
+  }
+  else {
+    alert("Win!");
+  }
 
-//display lose game notification
-function displayAlertLoseGame() {}
+}
+
 
 // ----- Score ------
+
+//lọc ra 10 người có số điểm cao nhất theo thứ tự từ list get đc từ api getScores
+function setLeaderBoard()
+{
+  $.ajax({
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
+    type: "GET",
+    contentType: "application/json",
+    Credential: "include",
+    url: "https://localhost:7099/api/Scores/GetScores",
+    xhrFields: {
+      withCredentials: true,
+    },
+    async: false,
+    error: function () {
+      console.log("Error");
+    },
+    success: function (data) {
+      console.log(data);
+      $('#leader-board').empty();
+      for(var i = 0; i < data.length; i++) {
+        $('#leader-board').append('<li class="text-white fs-3">'+ data[i].score +'</li>');
+      }
+    },
+  });
+}
 
 function saveScore() {
   $.ajax({
@@ -141,13 +201,13 @@ function saveScore() {
     type: "POST",
     contentType: "application/json",
     Credential: "include",
-    url: "https://localhost:7099/api/Scores",
+    url: "https://localhost:7099/api/Scores/PostScore",
     xhrFields: {
       withCredentials: true,
     },
     async: false,
     data: JSON.stringify({
-      user_id: user.user_id,
+      user_id: uid,
       score: score,
     }),
     error: function () {
@@ -159,8 +219,7 @@ function saveScore() {
   });
 }
 
-function getScoreByUserId()
-{
+function getScoreByUserId() {
   $.ajax({
     headers: {
       "Access-Control-Allow-Origin": "*",
@@ -168,7 +227,7 @@ function getScoreByUserId()
     type: "GET",
     contentType: "application/json",
     Credential: "include",
-    url: "https://localhost:7099/api/Scores/" + user_id,
+    url: "https://localhost:7099/api/Scores/GetScoreByUserId/" + uid,
     xhrFields: {
       withCredentials: true,
     },
@@ -177,7 +236,38 @@ function getScoreByUserId()
       console.log("Error");
     },
     success: function (data) {
-      user_score =data;
+      user_score = data;
+    },
+  });
+}
+
+function updateScoreByUserId() {
+
+  //Get lại cái dữ liệu score để lấy dữ liệu
+  getScoreByUserId();
+
+  $.ajax({
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
+    type: "PUT",
+    contentType: "application/json",
+    Credential: "include",
+    url: "https://localhost:7099/api/Scores/UpdateScore/" + uid,
+    xhrFields: {
+      withCredentials: true,
+    },
+    async: false,
+    data: JSON.stringify({
+      score_id: user_score.score_id,
+      user_id: uid,
+      score: score,
+    }),
+    error: function () {
+      console.log("Error");
+    },
+    success: function (data) {
+      console.log("Success Updates Score");
     },
   });
 }
@@ -228,28 +318,28 @@ function setDialog(check) {
     "Alo..., Là mình đây",
     "Là cậu à lâu lắm rồi mới gặp",
     "Bây giờ mình đang tham gia ai là triệu phú. Hiện mình đang ở câu hỏi số " +
-      index +
-      1 +
-      " và cần sự trợ giúp của cậu.",
+    index +
+    1 +
+    " và cần sự trợ giúp của cậu.",
     "Ok",
     "Câu hỏi là " +
-      question[index].question_content +
-      "\n " +
-      answer[0].answer_id +
-      ". " +
-      answer[0].answer_content +
-      "\n " +
-      answer[1].answer_id +
-      ". " +
-      answer[1].answer_content +
-      "\n " +
-      answer[2].answer_id +
-      ". " +
-      answer[2].answer_content +
-      "\n " +
-      answer[3].answer_id +
-      ". " +
-      answer[3].answer_content,
+    question[index].question_content +
+    "\n " +
+    answer[0].answer_id +
+    ". " +
+    answer[0].answer_content +
+    "\n " +
+    answer[1].answer_id +
+    ". " +
+    answer[1].answer_content +
+    "\n " +
+    answer[2].answer_id +
+    ". " +
+    answer[2].answer_content +
+    "\n " +
+    answer[3].answer_id +
+    ". " +
+    answer[3].answer_content,
     "Ok. Theo mình đáp án đúng là " + correctAnswer,
     "Cảm ơn cậu",
   ];

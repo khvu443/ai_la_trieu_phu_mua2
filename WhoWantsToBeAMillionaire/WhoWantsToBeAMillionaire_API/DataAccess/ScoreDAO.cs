@@ -12,7 +12,7 @@ namespace WhoWantsToBeAMillionaire_API.DataAccess
             {
                 using (var ctx = new ApplicationContext())
                 {
-                    list = ctx.Scores.OrderBy(s => s.score).ToList();
+                    list = ctx.Scores.OrderByDescending(s => s.score).ToList();
                 }
             }
             catch (Exception ex)
@@ -84,7 +84,6 @@ namespace WhoWantsToBeAMillionaire_API.DataAccess
                         ctx.Entry<Scores>(p).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                         ctx.SaveChanges();
                     }
-
                     //p.ScoresId = id;
                     //ctx.Scores.Update(p);
                     //ctx.SaveChanges();
